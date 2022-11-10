@@ -11,8 +11,10 @@ public:
     SavingsBankAccount(string id, double IntitialBalance, double MinimumBalance = 1000);
     void setMinBalance(double );
     double getMinBalance();
-    void withdraw(double);
-    void deposit(double);
+    void withdraw();
+    void deposit();
+    void writeToFile(ofstream&);
+    void printInfo();
 
 };
 

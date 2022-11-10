@@ -25,3 +25,11 @@ string client::getAddress() {
 string client::getPhone() {
     return Phone;
 }
+
+void client::setAccount(shared_ptr<BankAccount>acc){
+    account = acc;
+}
+
+shared_ptr<BankAccount>client::getAccount(){
+    return account;
+}

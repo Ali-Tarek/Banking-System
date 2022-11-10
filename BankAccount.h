@@ -18,8 +18,10 @@ public:
     void setID(string );
     double getBalance();
     string getID();
-    virtual void withdraw(double);
-    virtual void deposit(double);
+    virtual void withdraw();
+    virtual void deposit();
+    virtual void writeToFile(ofstream&);
+    virtual void printInfo();
 
 };
 

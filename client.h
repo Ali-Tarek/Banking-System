@@ -8,7 +8,7 @@ class client
 {
 private:
     string Name, Address, Phone;
-    BankAccount* Acc = nullptr;
+    shared_ptr<BankAccount>account;
 public:
     client(string = "", string = "", string = "");
     void setName(string);
@@ -17,6 +17,8 @@ public:
     string getName();
     string getAddress();
     string getPhone();
+    void setAccount(shared_ptr<BankAccount>);
+    shared_ptr<BankAccount> getAccount();
 
 };
 
