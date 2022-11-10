@@ -59,7 +59,7 @@ void SavingsBankAccount::deposit() {
 }
 
 void SavingsBankAccount::writeToFile(ofstream& file){
-    file << 2 << " " << BankAccount::getID() << " " << BankAccount::getBalance() << " " << MinBalance << '\n';
+    file << 2 << "\n" << BankAccount::getID() << "\n" << BankAccount::getBalance() << "\n" << MinBalance << '\n';
 }
 
 void SavingsBankAccount::printInfo(){

@@ -51,7 +51,7 @@ void BankAccount::deposit(){
 }
 
 void BankAccount::writeToFile(ofstream& file){
-    file << 1 << " " << ID << " " << Balance << '\n';
+    file << 1 << "\n" << ID << "\n" << Balance << '\n';
 }
 
 void BankAccount::printInfo(){

@@ -3,7 +3,6 @@
 
 BankingApplication::BankingApplication(string file){
     File = file;
-    idCounter = 1;
     load();
 }
 
@@ -14,26 +13,38 @@ BankingApplication::~BankingApplication(){
 void BankingApplication::load(){
     ifstream file(File);
     if(!file){
-        cout << "Can not open" << File << '\n';
+        cout << "Can not open " << File << '\n';
         return;
     }
+    string cnt = "0";
+    getline(file, cnt);
+    if(cnt == "0"){
+        cnt = "1";
+    }
+    idCounter = stoi(cnt);
     while(!file.eof()){
         string name, address, phone;
-        file >> name >> address >> phone;
+        getline(file, name);
+        if(name.empty()){
+            break;
+        }
+        getline(file, address);
+        getline(file, phone);
         client c(name, address, phone);
-        int type;
-        file >> type;
+        string type;
+        getline(file, type);
         shared_ptr<BankAccount>account;
-        if(type == 1){ //basic
-            string id;
-            double balance;
-            file >> id >> balance;
-            account = make_shared<BankAccount>(id, balance);
+        if(type == "1"){ //basic
+            string id, balance;
+            getline(file, id);
+            getline(file, balance);
+            account = make_shared<BankAccount>(id, stod(balance));
         }else{// saving
-            string id;
-            double balance, minBalance;
-            file >> id >> balance >> minBalance;
-            account = make_shared<SavingsBankAccount>(id, balance, minBalance);
+            string id, balance, minBalance;
+            getline(file, id);
+            getline(file, balance);
+            getline(file, minBalance);
+            account = make_shared<SavingsBankAccount>(id, stod(balance), stod(minBalance));
         }
         c.setAccount(account);
         clients.push_back(c);
@@ -47,8 +58,9 @@ void BankingApplication::save(){
         cout << "Can not open" << File << '\n';
         return;
     }
+    file << idCounter << '\n';
     for(auto client : clients){
-        file << client.getName() << " " << client.getAddress() << " " << client.getPhone() << " ";
+        file << client.getName() << "\n" << client.getAddress() << "\n" << client.getPhone() << "\n";
         shared_ptr<BankAccount>account = client.getAccount();
         account->writeToFile(file);
     }
