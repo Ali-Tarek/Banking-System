@@ -21,7 +21,10 @@ void BankingApplication::load(){
     if(cnt == "0"){
         cnt = "1";
     }
-    idCounter = stoi(cnt);
+    if(!cnt.empty())
+        idCounter = stoi(cnt);
+    else
+        idCounter = 1;
     while(!file.eof()){
         string name, address, phone;
         getline(file, name);
